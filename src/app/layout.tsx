@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Sidebar } from "@/components/layout/Sidebar";
@@ -15,7 +15,6 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Cognizance — AI Neural Mastery Platform",
   description: "Advanced cognitive learning engine with real-time retention tracking, AI-powered situational simulations, and cloud-synced mastery blueprints.",
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
   keywords: ["AI Learning", "Neural Retention", "Cognitive Profile", "Study Buddy", "Architecture Mastery"],
   authors: [{ name: "Cognizance Team" }],
   openGraph: {
@@ -23,6 +22,12 @@ export const metadata: Metadata = {
     description: "Architect your mastery with neural telemetry.",
     type: "website",
   }
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
