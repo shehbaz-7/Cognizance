@@ -247,8 +247,10 @@ function StudyWorkspaceContent() {
                   <div>
                     <span className="font-medium text-[var(--color-text-primary)]">Study Order:</span>
                     <div className="mt-1 flex flex-wrap gap-1.5">
-                      {notes.studyGuide.studyOrder.map((s, i) => (
-                        <span key={i} className="text-[11px] bg-[var(--color-bg-card2)] px-2 py-1 rounded">{i + 1}. {s}</span>
+                      {Array.isArray(notes.studyGuide?.studyOrder) && notes.studyGuide.studyOrder.map((s, i) => (
+                        <span key={i} className="text-[11px] bg-[var(--color-bg-card2)] px-2 py-1 rounded">
+                          {i + 1}. {typeof s === "object" ? (s as any).goal || (s as any).level || "Step" : String(s)}
+                        </span>
                       ))}
                     </div>
                   </div>
@@ -272,8 +274,10 @@ function StudyWorkspaceContent() {
                         <div className="text-sm font-medium">{step.level}</div>
                         <p className="text-xs text-[var(--color-text-muted)] mb-1">{step.goal}</p>
                         <div className="flex flex-wrap gap-1">
-                          {step.topics.map((t, j) => (
-                            <span key={j} className="text-[10px] bg-[var(--color-bg-card2)] px-1.5 py-0.5 rounded text-[var(--color-text-muted)]">{t}</span>
+                          {Array.isArray(step.topics) && step.topics.map((t, j) => (
+                            <span key={j} className="text-[10px] bg-[var(--color-bg-card2)] px-1.5 py-0.5 rounded text-[var(--color-text-muted)]">
+                              {typeof t === "object" ? (t as any).level || (t as any).goal || "Topic" : String(t)}
+                            </span>
                           ))}
                         </div>
                       </div>
