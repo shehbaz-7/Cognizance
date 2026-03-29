@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useSkills } from "@/lib/SkillContext";
 import type { QuizQuestion } from "@/lib/types";
 import { Loader2, Layers, ArrowRight, ArrowLeft, RefreshCw } from "lucide-react";
 import { motion } from "framer-motion";
 
-export default function FlashcardsPage() {
+function FlashcardsContent() {
   const searchParams = useSearchParams();
   const { skills, saveRevision } = useSkills();
   const [selectedSkillId, setSelectedSkillId] = useState(searchParams.get("skill") || "");
@@ -174,5 +174,13 @@ export default function FlashcardsPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function FlashcardsPage() {
+  return (
+    <Suspense fallback={null}>
+      <FlashcardsContent />
+    </Suspense>
   );
 }

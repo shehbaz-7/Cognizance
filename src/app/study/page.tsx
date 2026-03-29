@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useSkills } from "@/lib/SkillContext";
 import { useChat, type ChatMessage } from "@/lib/ChatContext";
@@ -8,7 +8,7 @@ import type { GeneratedNotes } from "@/lib/types";
 import { Loader2, BookOpen, Send, Bot, User, Sparkles, MessageCircle, ChevronDown, ChevronUp } from "lucide-react";
 import { AnimatedAIChat } from "@/components/ui/AnimatedAIChat";
 
-export default function StudyWorkspace() {
+function StudyWorkspaceContent() {
   const searchParams = useSearchParams();
   const { skills, getSkill, markPracticed, saveRevision } = useSkills();
   const { getChat, saveChat, loading: chatsLoading } = useChat();
@@ -342,5 +342,13 @@ export default function StudyWorkspace() {
           />
       </div>
     </div>
+  );
+}
+
+export default function StudyWorkspace() {
+  return (
+    <Suspense fallback={null}>
+      <StudyWorkspaceContent />
+    </Suspense>
   );
 }

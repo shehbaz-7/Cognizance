@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useSkills } from "@/lib/SkillContext";
 import type { QuizQuestion, QuizAttempt } from "@/lib/types";
 import { Loader2, Route as RouteIcon, CheckCircle2, XCircle, ArrowRight, RotateCcw } from "lucide-react";
 
-export default function ScenariosPage() {
+function ScenariosContent() {
   const searchParams = useSearchParams();
   const { skills, addQuizResult, saveRevision, isSyncing } = useSkills();
   const [selectedSkillId, setSelectedSkillId] = useState(searchParams.get("skill") || "");
@@ -316,5 +316,13 @@ export default function ScenariosPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function ScenariosPage() {
+  return (
+    <Suspense fallback={null}>
+      <ScenariosContent />
+    </Suspense>
   );
 }
