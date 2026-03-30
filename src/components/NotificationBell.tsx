@@ -67,6 +67,13 @@ export default function NotificationBell() {
     });
   }, [hasPermission]);
 
+  // Silently sync device token if permission was previously granted
+  useEffect(() => {
+    if (hasPermission && user?.uid) {
+      requestPushPermission(user.uid).catch(console.error);
+    }
+  }, [hasPermission, user?.uid]);
+
   const enableNotifications = async () => {
     setIsInitializing(true);
     const token = await requestPushPermission(user?.uid);
