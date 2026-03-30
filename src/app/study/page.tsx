@@ -97,7 +97,7 @@ function StudyWorkspaceContent() {
   };
 
   return (
-    <div className="flex-1 flex h-screen overflow-hidden">
+    <div className="flex-1 flex flex-col lg:flex-row h-screen overflow-hidden">
       {/* Left: Notes Panel */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
@@ -337,7 +337,7 @@ function StudyWorkspaceContent() {
       </div>
 
       {/* Right: Chatbot Panel */}
-      <div className={`border-l border-white/5 flex flex-col bg-zinc-950/80 backdrop-blur-3xl transition-all w-[350px] lg:w-[450px]`}>
+      <div className={`border-t lg:border-t-0 lg:border-l border-white/5 flex flex-col bg-zinc-950/80 backdrop-blur-3xl transition-all w-full lg:w-[450px] h-[40vh] lg:h-full shrink-0`}>
           <AnimatedAIChat
             messages={chatMessages}
             isTyping={chatLoading}

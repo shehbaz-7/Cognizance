@@ -89,7 +89,7 @@ function ScenariosContent() {
   };
 
   return (
-    <div className="flex-1 p-6 lg:p-8 max-w-[1000px] mx-auto w-full pt-8 relative">
+    <div className="flex-1 p-4 sm:p-6 lg:p-8 max-w-[1000px] mx-auto w-full pt-8 relative">
       {/* Cloud Sync Status Indicator */}
       {isSyncing && (
         <div className="fixed bottom-6 right-6 z-50 pointer-events-none">

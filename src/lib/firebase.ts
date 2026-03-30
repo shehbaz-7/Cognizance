@@ -1,8 +1,9 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, GithubAuthProvider, OAuthProvider } from "firebase/auth";
 import { getAnalytics, isSupported } from "firebase/analytics";
+import { getMessaging, isSupported as isMessagingSupported, Messaging } from "firebase/messaging";
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
@@ -29,4 +30,14 @@ if (typeof window !== "undefined") {
   });
 }
 
-export { app, auth, googleProvider, githubProvider, microsoftProvider };
+// Initialize Messaging lazily (Browser-only)
+let messaging: Messaging | null = null;
+if (typeof window !== "undefined" && typeof navigator !== "undefined") {
+  isMessagingSupported().then((supported) => {
+    if (supported) {
+      messaging = getMessaging(app);
+    }
+  });
+}
+
+export { app, auth, googleProvider, githubProvider, microsoftProvider, messaging };

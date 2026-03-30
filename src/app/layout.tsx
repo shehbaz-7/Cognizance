@@ -5,6 +5,7 @@ import { Sidebar } from "@/components/layout/Sidebar";
 import { SkillProvider } from "@/lib/SkillContext";
 import { ChatProvider } from "@/lib/ChatContext";
 import { ToastProvider } from "@/lib/ToastContext";
+import NotificationBell from "@/components/NotificationBell";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -47,6 +48,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="flex w-full h-screen overflow-hidden relative z-0">
               <Sidebar />
               <main className="flex-1 flex flex-col h-screen overflow-y-auto relative z-0">
+                <div className="fixed top-4 right-4 md:top-6 md:right-8 z-[60]">
+                   <NotificationBell />
+                </div>
                 {children}
               </main>
             </div>
